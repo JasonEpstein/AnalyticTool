@@ -13,7 +13,7 @@ namespace CleanUpLog
 
             var inputFileNameBefore = @"C:\TEMP\before.txt";
             var inputFileNameAfter = @"C:\TEMP\after.txt";
-            var outputFileName = @"C:\TEMP\FILE2.csv";
+            var outputFileName = @"C:\TEMP\output.csv";
 
             ConfigureArgs(args, ref inputFileNameBefore, ref inputFileNameBefore, ref outputFileName);
                                             
