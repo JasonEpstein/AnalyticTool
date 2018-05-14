@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using LINQtoCSV;
 
 namespace CleanUpLog
 {
     public class Utils
     {
+        public StatGenerator StatGenerator { get; } = new StatGenerator();
+
         public string RemoveParameters(string s)
         {
             if (s.Contains('?'))
@@ -93,86 +94,5 @@ namespace CleanUpLog
                 return true;
             return false;
         }
-
-        internal IEnumerable<ResultLine> GenerateStats(List<Row> beforeRows, List<Row> afterRows)
-        {
-            var beforeStats = beforeRows
-                .GroupBy(row => row.URL)
-                .Select(c1 => new ResultLine
-                {
-                    URL = c1.First().URL,
-                    HitsBefore = c1.Count(),
-                    SumBefore = c1.Sum(x => x.TimeTaken),
-                    MaxBefore = c1.Max(x => x.TimeTaken),
-                    Comparable = c1.First().IsComparable
-                })
-                .OrderByDescending(x => x.Comparable)
-                .ThenBy(x => x.URL);
-
-            var afterStats = afterRows
-                .GroupBy(row => row.URL)
-                .Select(c1 => new ResultLine
-                {
-                    URL = c1.First().URL,
-                    HitsAfter = c1.Count(),
-                    SumAfter = c1.Sum(x => x.TimeTaken),
-                    MaxAfter = c1.Max(x => x.TimeTaken),
-                    Comparable = c1.First().IsComparable
-                })
-                .OrderByDescending(x => x.Comparable)
-                .ThenBy(x => x.URL);
-
-            // Now merge two lists
-            return (from beforeStat in beforeStats
-                from afterStat in afterStats
-                where afterStat.URL.ToString() == beforeStat.URL.ToString()
-                select new ResultLine
-                {
-                    URL = beforeStat.URL,
-                    Comparable = beforeStat.Comparable,
-                    HitsBefore = beforeStat.HitsBefore,
-                    HitsAfter = afterStat.HitsAfter,
-                    MaxBefore = beforeStat.MaxBefore,
-                    MaxAfter = afterStat.MaxAfter,
-                    SumBefore = beforeStat.SumBefore,
-                    SumAfter = afterStat.SumAfter
-                }).ToList();
-        }
-    }
-
-    internal class ResultLine
-    {
-        [CsvColumn(FieldIndex = 1)]
-        public object URL { get; set; }
-
-        [CsvColumn(FieldIndex = 2)]
-        public int HitsBefore { get; set; }
-
-        [CsvColumn(FieldIndex = 3)]
-        public double? SumBefore { get; set; }
-
-        [CsvColumn(FieldIndex = 4)]
-        public double? AvgBefore => (double) (SumBefore / HitsBefore);
-
-        [CsvColumn(FieldIndex = 5)]
-        public double? MaxBefore { get; set; }
-
-        [CsvColumn(FieldIndex = 6)]
-        public bool Comparable { get; set; }
-
-        [CsvColumn(FieldIndex = 7)]
-        public int HitsAfter { get; set; }
-
-        [CsvColumn(FieldIndex = 8)]
-        public double? SumAfter { get; set; }
-
-        [CsvColumn(FieldIndex = 9)]
-        public double? AvgAfter => (double) (SumAfter / HitsAfter);
-
-        [CsvColumn(FieldIndex = 10)]
-        public double? MaxAfter { get; set; }
-
-        [CsvColumn(FieldIndex = 11, Name = "Improvement %")]
-        public double? Improvement => (AvgBefore-AvgAfter)/AvgBefore * 100;
     }
 }

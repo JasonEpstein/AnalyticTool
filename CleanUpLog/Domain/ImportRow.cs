@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace CleanUpLog
+namespace CleanUpLog.Domain
 {
-    public class Row
+    public class ImportRow
     {
         public DateTime Time { get; set; }
         public string URL { get; set; }
         public double? TimeTaken { get; set; }
         public bool IsComparable { get; set; }
         public DateTime DateImported { get; set; }
-
     }
 }
