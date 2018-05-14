@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CleanUpLog
+namespace StatGenerator
 {
     public class Utils
     {

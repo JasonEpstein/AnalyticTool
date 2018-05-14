@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CleanUpLog.Domain;
+using StatGenerator.Domain;
 
-namespace CleanUpLog
+namespace StatGenerator
 {
     public class StatGenerator
     {

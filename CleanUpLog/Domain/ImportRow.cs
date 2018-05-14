@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CleanUpLog.Domain
+namespace StatGenerator.Domain
 {
     public class ImportRow
     {

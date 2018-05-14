@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CleanUpLog.Domain;
+using StatGenerator.Domain;
 
-namespace CleanUpLog
+namespace StatGenerator
 {
     internal class Program
     {

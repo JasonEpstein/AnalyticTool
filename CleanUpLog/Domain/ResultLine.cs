@@ -1,6 +1,6 @@
 ﻿using LINQtoCSV;
 
-namespace CleanUpLog.Domain
+namespace StatGenerator.Domain
 {
     public class ResultLine
     {

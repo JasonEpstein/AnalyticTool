@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using CleanUpLog.Domain;
 using LINQtoCSV;
+using StatGenerator.Domain;
 
-namespace CleanUpLog
+namespace StatGenerator
 {
     internal class GenerateOutputStats
     {
