@@ -16,7 +16,9 @@ namespace StatGenerator
                     HitsBefore = c1.Count(),
                     SumBefore = c1.Sum(x => x.TimeTaken),
                     MaxBefore = c1.Max(x => x.TimeTaken),
-                    Comparable = c1.First().IsComparable
+                    Comparable = c1.First().IsComparable,
+                    MinBefore = c1.Min(x => x.TimeTaken),
+
                 })
                 .OrderByDescending(x => x.Comparable)
                 .ThenBy(x => x.URL);
@@ -29,7 +31,8 @@ namespace StatGenerator
                     HitsAfter = c1.Count(),
                     SumAfter = c1.Sum(x => x.TimeTaken),
                     MaxAfter = c1.Max(x => x.TimeTaken),
-                    Comparable = c1.First().IsComparable
+                    Comparable = c1.First().IsComparable,
+                    MinAfter = c1.Min(x => x.TimeTaken),
                 })
                 .OrderByDescending(x => x.Comparable)
                 .ThenBy(x => x.URL);
@@ -47,7 +50,9 @@ namespace StatGenerator
                     MaxBefore = beforeStat.MaxBefore,
                     MaxAfter = afterStat.MaxAfter,
                     SumBefore = beforeStat.SumBefore,
-                    SumAfter = afterStat.SumAfter
+                    SumAfter = afterStat.SumAfter,
+                    MinBefore = beforeStat.MinBefore,
+                    MinAfter = afterStat.MinAfter
                 }).ToList();
         }
     }

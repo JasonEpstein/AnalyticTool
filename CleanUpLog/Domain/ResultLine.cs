@@ -20,21 +20,30 @@ namespace StatGenerator.Domain
         public double? MaxBefore { get; set; }
 
         [CsvColumn(FieldIndex = 6)]
-        public bool Comparable { get; set; }
+        public double? MinBefore { get; set; }
 
         [CsvColumn(FieldIndex = 7)]
-        public int HitsAfter { get; set; }
+        public bool Comparable { get; set; }
 
         [CsvColumn(FieldIndex = 8)]
-        public double? SumAfter { get; set; }
+        public int HitsAfter { get; set; }
 
         [CsvColumn(FieldIndex = 9)]
-        public double? AvgAfter => (double) (SumAfter / HitsAfter);
+        public double? SumAfter { get; set; }
 
         [CsvColumn(FieldIndex = 10)]
+        public double? AvgAfter => (double) (SumAfter / HitsAfter);
+
+        [CsvColumn(FieldIndex = 11)]
         public double? MaxAfter { get; set; }
 
-        [CsvColumn(FieldIndex = 11, Name = "Improvement %")]
+        [CsvColumn(FieldIndex = 12)]
+        public double? MinAfter { get; set; }
+
+        [CsvColumn(FieldIndex = 13, Name = "Improvement %")]
         public double? Improvement => (AvgBefore - AvgAfter) / AvgBefore * 100;
+
+        [CsvColumn(FieldIndex = 14, Name = "Min Improvement %")]
+        public double? MinImprovement => (MinBefore - MinAfter) / MinBefore * 100;        
     }
 }

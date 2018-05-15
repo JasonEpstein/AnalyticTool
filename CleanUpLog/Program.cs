@@ -60,7 +60,7 @@ namespace StatGenerator
                 DateImported = DateTime.Now,
                 Time = Convert.ToDateTime(time),
                 URL = url,
-                IsComparable = utils.IsComparable(url)
+                IsComparable = utils.IsComparable(url)                
             };
 
             if (double.TryParse(timeTaken, out var number))
